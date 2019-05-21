@@ -1,21 +1,45 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import {
+  DefaultTheme,
+  Provider as PaperProvider,
+  Avatar,
+  Button,
+  Card,
+  Title,
+  Paragraph,
+} from 'react-native-paper';
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
+};
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <PaperProvider theme={theme}>
+        <Card>
+          <Card.Title
+            title="Card Title"
+            subtitle="Card Subtitle"
+            left={props => <Avatar.Icon {...props} icon="folder" />}
+          />
+          <Card.Content>
+            <Title>Card title</Title>
+            <Paragraph>Card content</Paragraph>
+          </Card.Content>
+          <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+          <Card.Actions>
+            <Button>Cancel</Button>
+            <Button>Ok</Button>
+          </Card.Actions>
+        </Card>
+      </PaperProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
