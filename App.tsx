@@ -1,9 +1,8 @@
 import React from 'react';
-import { DefaultTheme, Provider as PaperProvider, Appbar } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
-
-import Groups from './src/components/Groups';
+import { AppContainer } from './src/Navigation';
 
 const styles = StyleSheet.create({
   statusBar: {
@@ -26,10 +25,7 @@ export default class App extends React.Component {
     return (
       <PaperProvider theme={theme}>
         <View style={styles.statusBar} />
-        <Appbar>
-          <Appbar.Action icon="archive" onPress={() => console.log('Pressed archive')} />
-        </Appbar>
-        <Groups />
+        <AppContainer />
       </PaperProvider>
     );
   }

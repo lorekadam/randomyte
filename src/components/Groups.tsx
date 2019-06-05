@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { TextInput, Button } from 'react-native-paper';
-import { View, StyleSheet, FlatList } from 'react-native';
+import {
+  View, StyleSheet, FlatList, ScrollView,
+} from 'react-native';
 import { SingleOption } from '../types';
 
 import Option from './Option';
@@ -39,7 +41,7 @@ export default class Groups extends React.Component<{}, State> {
   };
 
   removeOption = (key: SingleOption['key']) => {
-    const { options } = this.state;
+    const options = [...this.state.options];
     for (let i = 0; i < options.length; i++) {
       const option = options[i];
       if (option.key === key) {
@@ -54,7 +56,7 @@ export default class Groups extends React.Component<{}, State> {
 
   render() {
     return (
-      <View style={styles.view}>
+      <ScrollView style={styles.view}>
         <TextInput
           label="Option"
           mode="outlined"
@@ -68,7 +70,7 @@ export default class Groups extends React.Component<{}, State> {
           data={this.state.options}
           renderItem={({ item }) => <Option item={item} remove={this.removeOption} />}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
