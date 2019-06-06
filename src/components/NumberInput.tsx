@@ -5,6 +5,8 @@ import { IconButton, Colors } from 'react-native-paper';
 interface Props {
   number: number;
   update(number: number): void;
+  disabledAdd?: boolean;
+  disabledRemove?: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -27,16 +29,22 @@ export default class NumberInput extends Component<Props, {}> {
   };
 
   render() {
-    const { number } = this.props;
+    const { number, disabledAdd, disabledRemove } = this.props;
     return (
       <View style={styles.row}>
         <Text>{number}</Text>
-        <IconButton icon="add" color={Colors.blue700} size={20} onPress={this.plus} />
         <IconButton
-          icon="remove"
+          icon="add-circle-outline"
+          color={Colors.blue700}
+          size={20}
+          onPress={this.plus}
+          disabled={disabledAdd}
+        />
+        <IconButton
+          icon="remove-circle-outline"
           color={Colors.red700}
           size={20}
-          disabled={number === 0}
+          disabled={disabledRemove}
           onPress={this.minus}
         />
       </View>

@@ -11,7 +11,7 @@ const AppNavigator = createStackNavigator(
     [screens.DICE]: DiceScreen,
   },
   {
-    initialRouteName: screens.DICE,
+    initialRouteName: screens.HOME,
     headerMode: 'none',
   },
 );
