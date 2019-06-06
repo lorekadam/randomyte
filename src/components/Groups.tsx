@@ -24,7 +24,7 @@ export default class Groups extends React.Component<{}, State> {
     options: [],
   };
 
-  changeText = (text) => {
+  changeText = (text:State['text']) => {
     this.setState({
       text,
     });

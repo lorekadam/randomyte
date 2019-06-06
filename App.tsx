@@ -1,7 +1,7 @@
 import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import { Constants } from 'expo';
+import Constants from 'expo-constants';
 import { AppContainer } from './src/Navigation';
 
 const styles = StyleSheet.create({

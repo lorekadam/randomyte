@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { IconButton, Colors } from 'react-native-paper';
 
@@ -17,37 +17,34 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class NumberInput extends Component<Props, {}> {
-  plus = () => {
-    const { update, number } = this.props;
+export default function NumberInput(props: Props) {
+  function plus() {
+    const { update, number } = props;
     update(number + 1);
-  };
-
-  minus = () => {
-    const { update, number } = this.props;
-    update(number - 1);
-  };
-
-  render() {
-    const { number, disabledAdd, disabledRemove } = this.props;
-    return (
-      <View style={styles.row}>
-        <Text>{number}</Text>
-        <IconButton
-          icon="add-circle-outline"
-          color={Colors.blue700}
-          size={20}
-          onPress={this.plus}
-          disabled={disabledAdd}
-        />
-        <IconButton
-          icon="remove-circle-outline"
-          color={Colors.red700}
-          size={20}
-          disabled={disabledRemove}
-          onPress={this.minus}
-        />
-      </View>
-    );
   }
+
+  function minus() {
+    const { update, number } = props;
+    update(number - 1);
+  }
+  const { number, disabledAdd, disabledRemove } = props;
+  return (
+    <View style={styles.row}>
+      <Text>{number}</Text>
+      <IconButton
+        icon="add-circle-outline"
+        color={Colors.blue700}
+        size={20}
+        onPress={plus}
+        disabled={disabledAdd}
+      />
+      <IconButton
+        icon="remove-circle-outline"
+        color={Colors.red700}
+        size={20}
+        disabled={disabledRemove}
+        onPress={minus}
+      />
+    </View>
+  );
 }
