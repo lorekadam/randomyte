@@ -20,13 +20,11 @@ const theme = {
   },
 };
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <PaperProvider theme={theme}>
-        <View style={styles.statusBar} />
-        <AppContainer />
-      </PaperProvider>
-    );
-  }
+export default function App() {
+  return (
+    <PaperProvider theme={theme}>
+      <View style={styles.statusBar} />
+      <AppContainer />
+    </PaperProvider>
+  );
 }

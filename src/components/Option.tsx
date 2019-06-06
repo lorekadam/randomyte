@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { List } from 'react-native-paper';
 
 import { SingleOption } from '../types';
@@ -8,20 +8,17 @@ interface Props {
   remove(key: SingleOption['key']): void;
 }
 
-export default class Option extends Component<Props, {}> {
-  removeItem = () => {
-    const { item, remove } = this.props;
+export default function Option(props: Props) {
+  const { item, remove } = props;
+  function removeItem() {
     remove(item.key);
-  };
-
-  render() {
-    const { item } = this.props;
-    return (
-      <List.Item
-        title={item.text}
-        onPress={this.removeItem}
-        right={props => <List.Icon {...props} icon="remove" />}
-      />
-    );
   }
+
+  return (
+    <List.Item
+      title={item.text}
+      onPress={removeItem}
+      right={props => <List.Icon {...props} icon="remove" />}
+    />
+  );
 }
