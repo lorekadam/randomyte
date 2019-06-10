@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Text } from 'react-native-paper';
-import {
-  StyleSheet, FlatList, ScrollView, View,
-} from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import { SingleOption } from '../types';
 
 import NumberInput from './NumberInput';
@@ -39,10 +37,6 @@ export default function Groups() {
 
   function removeOption(index: number) {
     setOptions(options.filter((option, i) => i !== index));
-  }
-
-  function keyExtractor(item: SingleOption, index: number) {
-    return `${index}`;
   }
 
   function updateGroupsAmount(number: State['groupsAmount']) {
