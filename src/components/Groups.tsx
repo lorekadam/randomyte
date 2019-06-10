@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { TextInput, Button, Text } from 'react-native-paper';
-import { StyleSheet, FlatList, ScrollView } from 'react-native';
+import { Button, Text } from 'react-native-paper';
+import {
+  StyleSheet, FlatList, ScrollView, View,
+} from 'react-native';
 import { SingleOption } from '../types';
 
-import Option from './Option';
 import NumberInput from './NumberInput';
+import OptionsInput from './OptionsInput';
+import OptionsList from './OptionsList';
 
 const styles = StyleSheet.create({
   view: {
@@ -26,17 +29,11 @@ interface State {
 }
 
 export default function Groups() {
-  const [text, setText] = useState<State['text']>('');
   const [options, setOptions] = useState<State['options']>([]);
   const [groupsAmount, setGroupsAmount] = useState<State['groupsAmount']>(2);
   const [groups, setGroups] = useState<State['groups']>([]);
 
-  function changeText(text: State['text']) {
-    setText(text);
-  }
-
-  function addOption() {
-    setText('');
+  function addOption(text: SingleOption['text']) {
     setOptions([...options, { text }]);
   }
 
@@ -89,23 +86,12 @@ export default function Groups() {
       </Button>
       {groups.length > 0
         && groups.map((group, i) => (
-          <FlatList
-            style={styles.group}
-            keyExtractor={keyExtractor}
-            data={group}
-            key={i}
-            renderItem={({ item, index }) => <Text>{`${index + 1}. ${item.text}`}</Text>}
-          />
+          <View style={styles.group} key={i}>
+            <OptionsList data={group} />
+          </View>
         ))}
-      <TextInput label="Option" mode="outlined" value={text} onChangeText={changeText} />
-      <Button icon="add-circle" mode="contained" onPress={addOption} disabled={text.length === 0}>
-        Add option
-      </Button>
-      <FlatList
-        keyExtractor={keyExtractor}
-        data={options}
-        renderItem={({ item, index }) => <Option item={item} index={index} remove={removeOption} />}
-      />
+      <OptionsInput add={addOption} />
+      <OptionsList data={options} remove={removeOption} />
     </ScrollView>
   );
 }

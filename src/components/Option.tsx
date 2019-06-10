@@ -6,11 +6,12 @@ import { SingleOption } from '../types';
 interface Props {
   item: SingleOption;
   index: number;
-  remove(key: Props['index']): void;
+  remove?(key: Props['index']): void;
 }
 
 export default function Option(props: Props) {
   const { item, index, remove } = props;
+
   function removeItem() {
     remove(index);
   }
@@ -18,8 +19,11 @@ export default function Option(props: Props) {
   return (
     <List.Item
       title={`${index + 1}. ${item.text}`}
-      onPress={removeItem}
-      right={props => <List.Icon {...props} color={Colors.red300} icon="remove-circle-outline" />}
+      onPress={remove && removeItem}
+      right={
+        remove
+        && (props => <List.Icon {...props} color={Colors.red300} icon="remove-circle-outline" />)
+      }
     />
   );
 }

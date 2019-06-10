@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator(
     [screens.ONE_FROM_GIVEN]: OneFromGiven,
   },
   {
-    initialRouteName: screens.HOME,
+    initialRouteName: screens.GROUPS,
     headerMode: 'none',
   },
 );
