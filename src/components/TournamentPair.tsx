@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import Option from './Option';
+import { IndexKeyExtractor } from '../utils';
 
 interface Props {
   data: any[];
@@ -10,12 +11,9 @@ interface Props {
 export default function TournamentPair(props: Props) {
   const { data, remove } = props;
 
-  function keyExtractor(item: any, index: number) {
-    return `${index}`;
-  }
   return (
     <FlatList
-      keyExtractor={keyExtractor}
+      keyExtractor={IndexKeyExtractor}
       data={data}
       renderItem={({ item, index }) => (
         <Option item={item} index={index} remove={remove && remove} />

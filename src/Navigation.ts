@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator(
     [screens.ONE_FROM_GIVEN]: OneFromGiven,
   },
   {
-    initialRouteName: screens.TOURNAMENT,
+    initialRouteName: screens.ONE_FROM_GIVEN,
     headerMode: 'none',
   },
 );
