@@ -3,6 +3,9 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { Checkbox, Button, Text } from 'react-native-paper';
 import { IndexKeyExtractor } from '../utils';
 import { SingleCategory, Item } from '../types';
+import { Col, Row, RowColumn } from '../styled/Grid';
+import { FlexView, BackgroundView, PaddingView } from '../styled/Views';
+import { lightBlue, dark } from '../styled/colors';
 
 const styles = StyleSheet.create({
   result: {
@@ -26,11 +29,17 @@ export const getCategoryList = (category) => {
       return require('../../assets/movies.json');
     case 'Games':
       return require('../../assets/games.json');
+    case 'Actors':
+      return require('../../assets/actors.json');
+    case 'Sport':
+      return require('../../assets/sport.json');
+    case 'Sitcoms':
+      return require('../../assets/sitcoms.json');
   }
 };
 
 export default function OneFromGiven() {
-  const categoriesOptions = ['Movies', 'Games'];
+  const categoriesOptions = ['Movies', 'Games', 'Actors', 'Sport', 'Sitcoms'];
   const [categories, setCategories] = useState<State['categories']>({});
   const [result, setResult] = useState<State['result']>(null);
 
@@ -75,31 +84,39 @@ export default function OneFromGiven() {
   }
 
   return (
-    <View>
-      <FlatList
-        data={categoriesOptions}
-        keyExtractor={IndexKeyExtractor}
-        renderItem={({ item }) => (
-          <View key={item}>
-            <Text>{item}</Text>
-            <Checkbox
-              status={categories[item] && categories[item].active ? 'checked' : 'unchecked'}
-              onPress={() => updateCategories(item)}
-            />
-          </View>
-        )}
-      />
-      <Button
-        onPress={random}
-        icon="shuffle"
-        mode="contained"
-        disabled={Object.keys(categories).length === 0}
-      >
-        Random
-      </Button>
-      {result !== null && Object.keys(result).length > 0 && (
-        <Text style={styles.result}>{result.PL}</Text>
-      )}
-    </View>
+    <BackgroundView bgc={lightBlue}>
+      <Row>
+        <FlatList
+          horizontal
+          data={categoriesOptions}
+          keyExtractor={IndexKeyExtractor}
+          renderItem={({ item }) => (
+            <PaddingView key={item}>
+              <Text>{item}</Text>
+              <Checkbox
+                status={categories[item] && categories[item].active ? 'checked' : 'unchecked'}
+                onPress={() => updateCategories(item)}
+              />
+            </PaddingView>
+          )}
+        />
+      </Row>
+      <Row>
+        <RowColumn>
+          <Button
+            onPress={random}
+            icon="shuffle"
+            mode="contained"
+            disabled={Object.keys(categories).length === 0}
+            color={dark}
+          >
+            Random
+          </Button>
+          {result !== null && Object.keys(result).length > 0 && (
+            <Text style={styles.result}>{result.PL}</Text>
+          )}
+        </RowColumn>
+      </Row>
+    </BackgroundView>
   );
 }
