@@ -50,24 +50,7 @@ interface State {
 export default function Tournament() {
   const participantsOptions: number[] = [4, 8, 16, 32];
   const [participants, setParticipants] = useState<State['participants']>(4);
-  const [options, setOptions] = useState<State['options']>([
-    { text: 'Adam1' },
-    { text: 'Kasia1' },
-    { text: 'Dominik1' },
-    { text: 'Magda1' },
-    { text: 'Adam2' },
-    { text: 'Kasia2' },
-    { text: 'Dominik2' },
-    { text: 'Magda2' },
-    // { text: 'Adam3' },
-    // { text: 'Kasia3' },
-    // { text: 'Dominik3' },
-    // { text: 'Magda3' },
-    // { text: 'Adam4' },
-    // { text: 'Kasia4' },
-    // { text: 'Dominik4' },
-    // { text: 'Magda4' },
-  ]);
+  const [options, setOptions] = useState<State['options']>([]);
   const [pairs, setPairs] = useState<State['pairs']>([]);
 
   function updateParticipants(option: State['participants']) {
