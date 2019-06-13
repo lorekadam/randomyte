@@ -9,6 +9,7 @@ import { lightBlue, dark, light, blue } from '../styled/colors';
 import { Text } from '../styled/Text';
 import Title from './Title';
 import BackButton from './BackButton';
+import BasicView from '../screens/BasicView';
 
 interface State {
   categories: { [name: string]: SingleCategory };
@@ -83,12 +84,9 @@ export default function OneFromGiven() {
   }
 
   return (
-    <BackgroundView bgc={light} padding={1}>
-      <BackButton />
+    <BasicView>
       <View>
-
-      
-      <Title text="Categories" />
+        <Title text="Categories" />
         <FlatList
           numColumns={3}
           data={categoriesOptions}
@@ -106,23 +104,22 @@ export default function OneFromGiven() {
               </PaddingView>
             </Col>
           )}
-          />
-          <Button
-            onPress={random}
-            icon="shuffle"
-            mode="contained"
-            disabled={Object.keys(categories).length === 0}
-            color={dark}
-            >
-            Lucky shot!
-          </Button>
-          {result !== null && Object.keys(result).length > 0 && (
-            <PaddingView padding={5}>
-              <Title round alignItems="center" bgc={blue} text={result.PL} fontSize={4} />
-            </PaddingView>
-            )}
-        
-            </View>
-    </BackgroundView>
+        />
+        <Button
+          onPress={random}
+          icon="shuffle"
+          mode="contained"
+          disabled={Object.keys(categories).length === 0}
+          color={dark}
+          >
+          Lucky shot!
+        </Button>
+        {result !== null && Object.keys(result).length > 0 && (
+          <PaddingView padding={5}>
+            <Title round alignItems="center" bgc={blue} text={result.PL} fontSize={4} />
+          </PaddingView>
+        )}        
+      </View>
+    </BasicView>
   );
 }

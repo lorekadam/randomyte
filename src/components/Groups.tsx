@@ -6,11 +6,9 @@ import { SingleOption } from '../types';
 import NumberInput from './NumberInput';
 import OptionsInput from './OptionsInput';
 import OptionsList from './OptionsList';
+import BasicView from '../screens/BasicView';
 
 const styles = StyleSheet.create({
-  view: {
-    padding: 10,
-  },
   group: {
     padding: 5,
     margin: 5,
@@ -63,29 +61,31 @@ export default function Groups() {
   }
 
   return (
-    <ScrollView style={styles.view}>
-      <Text>Groups amount</Text>
-      <NumberInput
-        number={groupsAmount}
-        update={updateGroupsAmount}
-        disabledRemove={groupsAmount === 2}
-      />
-      <Button
-        icon="shuffle"
-        mode="contained"
-        onPress={makeGroups}
-        disabled={options.length < groupsAmount}
-      >
-        Random
-      </Button>
-      {groups.length > 0
-        && groups.map((group, i) => (
-          <View style={styles.group} key={i}>
-            <OptionsList data={group} />
-          </View>
-        ))}
-      <OptionsInput add={addOption} />
-      <OptionsList data={options} remove={removeOption} />
-    </ScrollView>
+    <BasicView>
+      <ScrollView>
+        <Text>Groups amount</Text>
+        <NumberInput
+          number={groupsAmount}
+          update={updateGroupsAmount}
+          disabledRemove={groupsAmount === 2}
+        />
+        <Button
+          icon="shuffle"
+          mode="contained"
+          onPress={makeGroups}
+          disabled={options.length < groupsAmount}
+        >
+          Random
+        </Button>
+        {groups.length > 0
+          && groups.map((group, i) => (
+            <View style={styles.group} key={i}>
+              <OptionsList data={group} />
+            </View>
+          ))}
+        <OptionsInput add={addOption} />
+        <OptionsList data={options} remove={removeOption} />
+      </ScrollView>
+    </BasicView>
   );
 }
