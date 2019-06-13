@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Randomyte",
-    "slug": "randomyte",
+    "slug": "Randomyte",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],
@@ -18,7 +18,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.adamlorek.randomyte"
+    },
+    "android": {
+      "package": "com.adamlorek.randomyte"
+    },
+    "description": "",
+    "githubUrl": "https://github.com/lorekadam/randomyte"
   }
 }
