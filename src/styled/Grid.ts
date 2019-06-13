@@ -1,9 +1,5 @@
 import styled from 'styled-components/native';
 
-interface Props {
-  padding?: number;
-}
-
 export const Row = styled.View`
   display: flex;
   flex-direction: row;
