@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "randomyte",
-    "slug": "randomyte",
+    "name": "Randomyte",
+    "slug": "Randomyte",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],
