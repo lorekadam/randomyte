@@ -16,13 +16,14 @@ export const FlexView = styled.View`
 `;
 
 export const PaddingView = styled.View`
-  padding: ${(props: Props) => (props.padding ? heightPtoDPpx(props.padding) : '10px')};
+  padding: ${(props: Props) => (props.padding ? heightPtoDPpx(props.padding) : heightPtoDPpx(1))};
 `;
 
 export const BackgroundView = styled.View`
   display: flex;
   flex: 1;
   background-color: ${(props: Props) => (props.bgc ? props.bgc : 'transparent')};
+  ${(props: Props) => props.padding && `padding:${heightPtoDPpx(props.padding)}`};
 `;
 
 export const AbsoluteView = styled.View`

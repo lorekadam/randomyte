@@ -6,6 +6,7 @@ interface Props {
   color?: string;
   fontSize?: number;
   padding?: number;
+  paddingSides?: number;
 }
 
 export const Text = styled.Text`
@@ -13,4 +14,6 @@ export const Text = styled.Text`
   color: ${(props: Props) => (props.color ? props.color : light)};
   font-size: ${(props: Props) => (props.fontSize ? heightPtoDPpx(props.fontSize) : heightPtoDPpx(1.7))};
   font-family: oswald;
+  ${(props: Props) => props.paddingSides && `padding-left:${heightPtoDPpx(props.paddingSides)}`};
+  ${(props: Props) => props.paddingSides && `padding-right:${heightPtoDPpx(props.paddingSides)}`};
 `;

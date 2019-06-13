@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationScreenProp } from 'react-navigation';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import * as screens from '../screens';
 import { RoundBlock } from '../styled/RoundBlock';
@@ -8,12 +7,9 @@ import { PaddingView, BackgroundView, AbsoluteView } from '../styled/Views';
 import { Text } from '../styled/Text';
 import { Row, Col } from '../styled/Grid';
 import { heightPtoDP } from '../utils';
+import { NavigationProps } from '../types';
 
-interface Props {
-  navigation: NavigationScreenProp<any, any>;
-}
-
-export default function HomeScreen(props: Props) {
+export default function HomeScreen(props: NavigationProps) {
   function navigate(screen) {
     props.navigation.navigate(screen);
   }
@@ -23,7 +19,7 @@ export default function HomeScreen(props: Props) {
       <Row>
         <Col>
           <PaddingView padding={2}>
-            <RoundBlock bgc={dark} onPress={() => navigate(screens.GROUPS)}>
+            <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.GROUPS)}>
               <Text fontSize={3.5} padding={1}>
                 {screens.GROUPS.toLocaleUpperCase()}
               </Text>
@@ -35,7 +31,7 @@ export default function HomeScreen(props: Props) {
         </Col>
         <Col>
           <PaddingView padding={2}>
-            <RoundBlock bgc={dark} onPress={() => navigate(screens.ONE_FROM_GIVEN)}>
+            <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.ONE_FROM_GIVEN)}>
               <Text fontSize={3.5} padding={1}>
                 {screens.ONE_FROM_GIVEN.toLocaleUpperCase()}
               </Text>
@@ -49,7 +45,7 @@ export default function HomeScreen(props: Props) {
       <Row>
         <Col>
           <PaddingView padding={2}>
-            <RoundBlock bgc={dark} onPress={() => navigate(screens.DICE)}>
+            <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.DICE)}>
               <Text fontSize={3.5} padding={1}>
                 {screens.DICE.toLocaleUpperCase()}
               </Text>
@@ -61,7 +57,7 @@ export default function HomeScreen(props: Props) {
         </Col>
         <Col>
           <PaddingView padding={2}>
-            <RoundBlock bgc={dark} onPress={() => navigate(screens.TOURNAMENT)}>
+            <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.TOURNAMENT)}>
               <Text fontSize={3.5} padding={1}>
                 {screens.TOURNAMENT.toLocaleUpperCase()}
               </Text>

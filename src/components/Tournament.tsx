@@ -7,6 +7,7 @@ import { SingleOption } from '../types';
 import OptionsInput from './OptionsInput';
 import OptionsList from './OptionsList';
 import TournamentPair from './TournamentPair';
+import BackButton from './BackButton';
 
 const styles = StyleSheet.create({
   row: {
@@ -110,6 +111,7 @@ export default function Tournament() {
 
   return (
     <ScrollView>
+      <BackButton />
       <View style={styles.row}>
         {participantsOptions.map(option => (
           <TouchableOpacity
