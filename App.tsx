@@ -4,7 +4,7 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { AppContainer } from './src/Navigation';
-import { dark } from './src/styled/colors';
+import { dark, blue } from './src/styled/colors';
 
 const styles = StyleSheet.create({
   statusBar: {
@@ -18,7 +18,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: dark,
-    accent: 'blue',
+    accent: blue,
   },
 };
 

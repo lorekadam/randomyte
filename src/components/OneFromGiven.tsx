@@ -5,16 +5,10 @@ import { IndexKeyExtractor } from '../utils';
 import { SingleCategory, Item } from '../types';
 import { Col, Row, RowColumn } from '../styled/Grid';
 import { FlexView, BackgroundView, PaddingView } from '../styled/Views';
-import { lightBlue, dark, light } from '../styled/colors';
+import { lightBlue, dark, light, blue } from '../styled/colors';
 import { Text } from '../styled/Text';
 import Title from './Title';
 import BackButton from './BackButton';
-
-const styles = StyleSheet.create({
-  result: {
-    fontSize: 24,
-  },
-});
 
 interface State {
   categories: { [name: string]: SingleCategory };
@@ -91,6 +85,9 @@ export default function OneFromGiven() {
   return (
     <BackgroundView bgc={light} padding={1}>
       <BackButton />
+      <View>
+
+      
       <Title text="Categories" />
         <FlatList
           numColumns={3}
@@ -100,30 +97,32 @@ export default function OneFromGiven() {
             <Col>
               <PaddingView key={item}>
                 <Row alignItems="center">
-                <Text fontSize={2} color={dark} onPress={() => updateCategories(item)}>{item}</Text>
+                <Text fontSize={2.1} color={dark} onPress={() => updateCategories(item)}>{item}</Text>
                 <Checkbox
                   status={categories[item] && categories[item].active ? 'checked' : 'unchecked'}
                   onPress={() => updateCategories(item)}
-                />  
+                  />  
                 </Row>
               </PaddingView>
             </Col>
           )}
-        />
-        <RowColumn>
+          />
           <Button
             onPress={random}
             icon="shuffle"
             mode="contained"
             disabled={Object.keys(categories).length === 0}
             color={dark}
-          >
-            Hit me with your best shot!
+            >
+            Lucky shot!
           </Button>
           {result !== null && Object.keys(result).length > 0 && (
-            <Text style={styles.result}>{result.PL}</Text>
-          )}
-        </RowColumn>
+            <PaddingView padding={5}>
+              <Title round alignItems="center" bgc={blue} text={result.PL} fontSize={4} />
+            </PaddingView>
+            )}
+        
+            </View>
     </BackgroundView>
   );
 }
