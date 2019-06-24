@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Text } from 'react-native-paper';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import {
+  AsyncStorage, StyleSheet, ScrollView, View,
+} from 'react-native';
 import { SingleOption } from '../types';
 
 import NumberInput from './NumberInput';
 import OptionsInput from './OptionsInput';
 import OptionsList from './OptionsList';
 import BasicView from '../screens/BasicView';
+import PillOptionsList from './PillOptionsList';
 
 const styles = StyleSheet.create({
   group: {
@@ -20,28 +23,55 @@ const styles = StyleSheet.create({
 interface State {
   text: string;
   options: SingleOption[];
+  pastOptions: {[name:string]:SingleOption};
   groupsAmount: number;
   groups: SingleOption[][];
 }
 
 export default function Groups() {
   const [options, setOptions] = useState<State['options']>([]);
+  const [pastOptions, setPastOptions] = useState<State['pastOptions']>({});
   const [groupsAmount, setGroupsAmount] = useState<State['groupsAmount']>(2);
   const [groups, setGroups] = useState<State['groups']>([]);
 
-  function addOption(text: SingleOption['text']) {
+  useEffect(() => {
+    const getPastGroupOptions = async () => {
+      const result = await AsyncStorage.getItem('pastGroupOptions');
+      if(result){
+        setPastOptions(JSON.parse(result));
+      }
+    };
+    getPastGroupOptions();
+  });
+
+  const addOption = async (text: SingleOption['text']) => {
     setOptions([...options, { text }]);
-  }
+    const pastGroupOptions = await AsyncStorage.getItem('pastGroupOptions');
+    if (pastGroupOptions) {
+      const newOptionsValue = JSON.parse(pastGroupOptions);
+      if(!newOptionsValue[text]){
+        newOptionsValue[text] = { text };
+        await AsyncStorage.setItem('pastGroupOptions', JSON.stringify(newOptionsValue));
+      }
+    } else {
+      await AsyncStorage.setItem('pastGroupOptions', JSON.stringify({ [text]: { text } }));
+    }
+  };
 
-  function removeOption(index: number) {
+  const removeOption = (index: number) => {
     setOptions(options.filter((option, i) => i !== index));
+  };
+
+  const removeHistoryOption = async (text: string) => {
+    delete pastOptions[text];
+    await AsyncStorage.setItem('pastGroupOptions', JSON.stringify(pastOptions));
   }
 
-  function updateGroupsAmount(number: State['groupsAmount']) {
+  const updateGroupsAmount = (number: State['groupsAmount']) => {
     setGroupsAmount(number);
-  }
+  };
 
-  function makeGroups() {
+  const makeGroups = () => {
     const groups: State['groups'] = [];
     const source = [...options];
     let group = 0;
@@ -58,11 +88,22 @@ export default function Groups() {
       }
     }
     setGroups(groups);
-  }
+  };
+
+  const clearHistory = async () => {
+    await AsyncStorage.setItem('pastGroupOptions', '');
+    setPastOptions({});
+  };
 
   return (
     <BasicView>
       <ScrollView>
+        <Button icon="shuffle" mode="contained" onPress={clearHistory}>
+          Clear history
+        </Button>
+        {Object.keys(pastOptions).length > 0 && 
+          <PillOptionsList onPress={addOption} onClose={removeHistoryOption} data={Object.keys(pastOptions)} />
+        }
         <Text>Groups amount</Text>
         <NumberInput
           number={groupsAmount}
