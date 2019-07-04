@@ -17,7 +17,7 @@ const AppNavigator = createStackNavigator(
     [screens.NEW_GAME]: NewGameScreen,
   },
   {
-    initialRouteName: screens.GROUPS,
+    initialRouteName: screens.NEW_GAME,
     headerMode: 'none',
   },
 );

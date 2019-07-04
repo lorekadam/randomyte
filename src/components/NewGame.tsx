@@ -5,6 +5,7 @@ import { Row, Col } from '../styled/Grid';
 import { blue, lightBlue } from '../styled/colors';
 import Title from './Title';
 import Groups from './Groups';
+import InputHistory from './InputHistory';
 
 interface State {
   teams: number;
@@ -39,7 +40,7 @@ export default function NewGame() {
         ))}
       </Row>
       <Title text="Gracze" />
-      <Groups />
+      <InputHistory />
       <Title text="Długość rundy (minuty)" />
       <Row>
         {timeOptions.map((timeOption) => {
