@@ -16,7 +16,7 @@ export default function HomeScreen(props: NavigationProps) {
 
   return (
     <BackgroundView bgc={light}>
-      <Row>
+      <Row flex={1}>
         <Col>
           <PaddingView padding={2}>
             <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.GROUPS)}>
@@ -42,7 +42,7 @@ export default function HomeScreen(props: NavigationProps) {
           </PaddingView>
         </Col>
       </Row>
-      <Row>
+      <Row flex={1}>
         <Col>
           <PaddingView padding={2}>
             <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.DICE)}>
@@ -63,6 +63,20 @@ export default function HomeScreen(props: NavigationProps) {
               </Text>
               <AbsoluteView left={-10} bottom={-2}>
                 <Ionicons size={heightPtoDP(30)} color={light} name="md-football" />
+              </AbsoluteView>
+            </RoundBlock>
+          </PaddingView>
+        </Col>
+      </Row>
+      <Row flex={1}>
+        <Col>
+          <PaddingView padding={2}>
+            <RoundBlock height={100} bgc={dark} onPress={() => navigate(screens.NEW_GAME)}>
+              <Text fontSize={3.5} padding={1}>
+                {screens.NEW_GAME.toLocaleUpperCase()}
+              </Text>
+              <AbsoluteView left={-10} bottom={-2}>
+                <Ionicons size={heightPtoDP(30)} color={light} name="md-shuffle" />
               </AbsoluteView>
             </RoundBlock>
           </PaddingView>

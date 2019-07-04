@@ -19,6 +19,7 @@ export default function Title(props: Props) {
       alignItems={props.alignItems ? props.alignItems : 'flex-start'}
       justifyContent={props.justifyContent ? props.justifyContent : 'center'}
       padding={props.padding ? props.padding : 1.2}
+      marginVertical={1.5}
     >
       <Text
         paddingSides={props.paddingSides ? props.paddingSides : 1.2}

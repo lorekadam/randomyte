@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Checkbox, Button } from 'react-native-paper';
 import { IndexKeyExtractor } from '../utils';
 import { SingleCategory, Item } from '../types';
-import { Col, Row, RowColumn } from '../styled/Grid';
-import { FlexView, BackgroundView, PaddingView } from '../styled/Views';
-import { lightBlue, dark, light, blue } from '../styled/colors';
+import { Col, Row } from '../styled/Grid';
+import {PaddingView } from '../styled/Views';
+import { dark, blue } from '../styled/colors';
 import { Text } from '../styled/Text';
 import Title from './Title';
-import BackButton from './BackButton';
 import BasicView from '../screens/BasicView';
 
 interface State {
@@ -31,15 +30,11 @@ export const getCategoryList = (category) => {
       return require('../../assets/actors.json');
     case 'Sport':
       return require('../../assets/sport.json');
-    case 'Sitcoms':
-      return require('../../assets/sitcoms.json');
-      case 'Netflix':
-          return require('../../assets/netflix.json');
   }
 };
 
 export default function OneFromGiven() {
-  const categoriesOptions = ['Movies', 'Games', 'Actors', 'Sport', 'Sitcoms', 'Netflix'];
+  const categoriesOptions = ['Movies', 'Games', 'Actors', 'Sport'];
   const [categories, setCategories] = useState<State['categories']>({});
   const [result, setResult] = useState<State['result']>(null);
 
@@ -88,7 +83,7 @@ export default function OneFromGiven() {
       <View>
         <Title text="Categories" />
         <FlatList
-          numColumns={3}
+          numColumns={4}
           data={categoriesOptions}
           keyExtractor={IndexKeyExtractor}
           renderItem={({ item }) => (

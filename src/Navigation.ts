@@ -5,6 +5,7 @@ import * as screens from './screens';
 import DiceScreen from './screens/DiceScreen';
 import TournamentScreen from './screens/TournamentScreen';
 import OneFromGiven from './components/OneFromGiven';
+import NewGameScreen from './screens/NewGameScreen';
 
 const AppNavigator = createStackNavigator(
   {
@@ -13,9 +14,10 @@ const AppNavigator = createStackNavigator(
     [screens.DICE]: DiceScreen,
     [screens.TOURNAMENT]: TournamentScreen,
     [screens.ONE_FROM_GIVEN]: OneFromGiven,
+    [screens.NEW_GAME]: NewGameScreen,
   },
   {
-    initialRouteName: screens.HOME,
+    initialRouteName: screens.GROUPS,
     headerMode: 'none',
   },
 );
