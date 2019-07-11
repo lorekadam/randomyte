@@ -8,6 +8,11 @@ export interface SingleOption {
   text: string;
 }
 
+export interface SingleCategorySelect {
+  name: string;
+  active: boolean;
+}
+
 export interface SingleCategory {
   name: string;
   active: boolean;

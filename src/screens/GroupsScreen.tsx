@@ -26,18 +26,8 @@ export default function GroupsScreen() {
     setGroupsAmount(number);
   };
 
-  const addOption = async (text: SingleOption['text']) => {
+  const addOption = (text: SingleOption['text']) => {
     setOptions([...options, { text }]);
-    const historyOptions = await AsyncStorage.getItem('historyOptions');
-    if (historyOptions) {
-      const newOptionsValue = JSON.parse(historyOptions);
-      if (!newOptionsValue[text]) {
-        newOptionsValue[text] = { text };
-        await AsyncStorage.setItem('historyOptions', JSON.stringify(newOptionsValue));
-      }
-    } else {
-      await AsyncStorage.setItem('historyOptions', JSON.stringify({ [text]: { text } }));
-    }
   };
 
   const removeOption = (index: number) => {
@@ -49,12 +39,10 @@ export default function GroupsScreen() {
       <ScrollView>
         <InputHistory onPress={addOption} />
         <GroupsAmount number={groupsAmount} update={updateGroupsAmount} />
-        { groups.length > 0 &&
-          <Groups groups={groups}/>
-        }
+        {groups.length > 0 && <Groups groups={groups} />}
         <OptionsInput add={addOption} />
         <OptionsList data={options} remove={removeOption} />
-        <RollGroups options={options} groupsAmount={groupsAmount} setGroups={setGroups}/>
+        <RollGroups options={options} groupsAmount={groupsAmount} setGroups={setGroups} />
       </ScrollView>
     </BasicView>
   );

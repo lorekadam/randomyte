@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 
 interface State {
@@ -13,14 +13,24 @@ interface Props {
 export default function OptionsInput(props: Props) {
   const [value, setValue] = useState<State['value']>('');
 
-  function updateValue(value: State['value']) {
+  const updateValue = (value: State['value']) => {
     setValue(value);
-  }
+  };
 
-  function addOption() {
+  const addOption = async () => {
     props.add(value);
+    const historyOptions = await AsyncStorage.getItem('historyOptions');
+    if (historyOptions) {
+      const newOptionsValue = JSON.parse(historyOptions);
+      if (!newOptionsValue[value]) {
+        newOptionsValue[value] = { value };
+        await AsyncStorage.setItem('historyOptions', JSON.stringify(newOptionsValue));
+      }
+    } else {
+      await AsyncStorage.setItem('historyOptions', JSON.stringify({ [value]: { value } }));
+    }
     setValue('');
-  }
+  };
 
   return (
     <View>
