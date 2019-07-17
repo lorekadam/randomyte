@@ -5,19 +5,26 @@ import { IndexKeyExtractor } from '../utils';
 
 interface Props {
   data: any[];
-  remove?(key: number): void;
+  remove?: (key: number) => void;
 }
 
-export default function OptionsList(props: Props) {
+export const OptionsList = (props: Props) => {
   const { data, remove } = props;
-
   return (
-    <FlatList
-      keyExtractor={IndexKeyExtractor}
-      data={data}
-      renderItem={({ item, index }) => (
+    <React.Fragment>
+      {data.map((item, index) => (
         <Option item={item} index={index} remove={remove && remove} />
-      )}
-    />
+      ))}
+      <FlatList
+        keyExtractor={IndexKeyExtractor}
+        data={data}
+        renderItem={({ item, index }) => {
+          console.log(item);
+          return <Option item={item} index={index} remove={remove && remove} />;
+        }}
+      />
+    </React.Fragment>
   );
-}
+};
+
+export default OptionsList;

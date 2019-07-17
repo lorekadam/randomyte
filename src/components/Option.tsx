@@ -6,11 +6,12 @@ import { SingleOption } from '../types';
 interface Props {
   item: SingleOption;
   index: number;
-  remove?(key: Props['index']): void;
+  remove?: (key: Props['index']) => void;
 }
 
 export default function Option(props: Props) {
   const { item, index, remove } = props;
+  console.log(item);
 
   function removeItem() {
     remove(index);

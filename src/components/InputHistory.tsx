@@ -9,7 +9,7 @@ interface State {
 }
 
 interface Props {
-  onPress(text: string): void;
+  onPress: (text: string) => void;
 }
 
 export default function InputHistory(props: Props) {
@@ -23,7 +23,7 @@ export default function InputHistory(props: Props) {
       }
     };
     historyOptions();
-  });
+  }, []);
 
   const clearHistory = async () => {
     await AsyncStorage.setItem('historyOptions', '');

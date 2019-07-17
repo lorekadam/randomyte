@@ -10,7 +10,7 @@ interface State {
 interface Props {
   options: SingleOption[];
   groupsAmount: number;
-  setGroups(groups: SingleOption[][]): void;
+  setGroups: (groups: SingleOption[][]) => void;
 }
 
 export default function RollGroups(props: Props) {

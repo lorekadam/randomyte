@@ -7,7 +7,7 @@ interface State {
 }
 
 interface Props {
-  add(value: State['value']): void;
+  add: (value: State['value']) => void;
 }
 
 export default function OptionsInput(props: Props) {

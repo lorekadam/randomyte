@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {observer} from "mobx-react-lite";
 import { Button, Checkbox } from 'react-native-paper';
 import { ScrollView, FlatList } from 'react-native';
 import BasicView from '../screens/BasicView';
@@ -12,6 +13,7 @@ import OptionsList from './OptionsList';
 import { IndexKeyExtractor } from '../utils';
 import { PaddingView } from '../styled/Views';
 import { Text } from '../styled/Text';
+import { RootStoreContext } from '../stores/RootStore';
 
 export const getCategoryList = (category) => {
   switch (category) {
@@ -33,7 +35,9 @@ interface State {
   categories: { [name: string]: SingleCategorySelect };
 }
 
-export default function NewGame() {
+export const NewGame:React.FC = observer(() => {
+  const rootStore = React.useContext(RootStoreContext);
+  const { gameStore } = rootStore;
   const teamsOptions: number[] = [2, 3, 4, 5, 6];
   const categoriesOptions = ['Movies', 'Games', 'Actors', 'Sport'];
 
@@ -45,17 +49,14 @@ export default function NewGame() {
     { min: 3, sec: 180 },
   ];
 
-  const [teamsAmount, setTeamsAmount] = useState<State['teamsAmount']>(2);
-  const [time, setTime] = useState<State['time']>(90);
-  const [options, setOptions] = useState<State['options']>([]);
   const [categories, setCategories] = useState<State['categories']>({});
 
   const addOption = (text: SingleOption['text']) => {
-    setOptions([...options, { text }]);
+    gameStore.options.push({text})
   };
 
   const removeOption = (index: number) => {
-    setOptions(options.filter((option, i) => i !== index));
+    gameStore.options = gameStore.options.filter((option, i) => i !== index);
   };
 
   const updateCategories = (category: string) => {
@@ -75,10 +76,7 @@ export default function NewGame() {
   }
 
   const startGame = () => {
-    console.log(teamsAmount)
-    console.log(time);
-    console.log(options);
-    console.log(categories);
+
   }
 
   return (
@@ -89,9 +87,9 @@ export default function NewGame() {
         {teamsOptions.map(option => (
           <Col key={option}>
             <Button
-              color={teamsAmount === option ? blue : lightBlue}
+              color={gameStore.teamsAmount === option ? blue : lightBlue}
               mode="contained"
-              onPress={() => setTeamsAmount(option)}
+              onPress={() => gameStore.teamsAmount = option}
             >
               {option}
             </Button>
@@ -101,7 +99,7 @@ export default function NewGame() {
       <InputHistory onPress={addOption} />
       <Title text="Gracze" />
       <OptionsInput add={addOption} />
-      <OptionsList data={options} remove={removeOption} />
+      <OptionsList data={gameStore.options} remove={removeOption} />
       <Title text="Długość rundy (minuty)" />
       <Row>
         {timeOptions.map((timeOption) => {
@@ -109,9 +107,9 @@ export default function NewGame() {
           return (
             <Col key={min}>
               <Button
-                color={sec === time ? blue : lightBlue}
+                color={gameStore.time === sec ? blue : lightBlue}
                 mode="contained"
-                onPress={() => setTime(sec)}
+                onPress={() => gameStore.time = sec}
               >
                 {min}
               </Button>
@@ -143,10 +141,12 @@ export default function NewGame() {
         color={blue}
         mode="contained"
         onPress={startGame}
-        disabled={Object.keys(categories).length === 0 || options.length < teamsAmount * 2}
+        disabled={Object.keys(categories).length === 0 || gameStore.options.length < gameStore.teamsAmount * 2}
       >
         START 
       </Button>
     </BasicView>
   );
-}
+});
+
+export default NewGame

@@ -5,7 +5,7 @@ import NumberInput from './NumberInput';
 
 interface Props {
   number: number;
-  update(number: number): void;
+  update: (number: number) => void;
 }
 
 export default function GroupsAmount(props: Props) {

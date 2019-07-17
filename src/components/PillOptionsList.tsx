@@ -5,8 +5,8 @@ import { IndexKeyExtractor } from '../utils';
 
 interface Props {
   data: string[];
-  onPress(text: string): void;
-  onClose(text: string): void;
+  onPress: (text: string) => void;
+  onClose: (text: string) => void;
 }
 
 export default function PillOptionsList(props: Props) {
