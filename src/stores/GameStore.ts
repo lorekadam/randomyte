@@ -1,6 +1,7 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import { RootStore } from './RootStore';
 import { SingleOption, SingleCategorySelect } from '../types';
+import { persist } from 'mobx-persist';
 
 export class GameStore {
   rootStore: RootStore;
@@ -9,11 +10,20 @@ export class GameStore {
     this.rootStore = rootStore;
   }
 
-  @observable teamsAmount: number = 2;
+  @persist @observable teamsAmount: number = 2;
 
-  @observable time: number = 90;
+  @persist @observable time: number = 90;
 
-  @observable options: SingleOption[] = [];
+  @persist('list') @observable options: SingleOption[] = [];
 
-  @observable categories: { [name: string]: SingleCategorySelect } = {};
+  @persist('object') @observable categories: {
+    [name: string]: SingleCategorySelect;
+  } = {};
+
+  @action resetGameSettings() {
+    this.teamsAmount = 2;
+    this.time = 90;
+    this.options = [];
+    this.categories = {};
+  }
 }

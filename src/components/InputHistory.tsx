@@ -1,54 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { View, AsyncStorage } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { Button } from 'react-native-paper';
-import { SingleOption } from '../types';
 import PillOptionsList from './PillOptionsList';
-
-interface State {
-  historyOptions: { [name: string]: SingleOption };
-}
+import { observer } from 'mobx-react-lite';
+import { RootStoreContext } from '../stores/RootStore';
 
 interface Props {
   onPress: (text: string) => void;
 }
 
-export default function InputHistory(props: Props) {
+export const InputHistory = observer((props: Props) => {
+  const rootStore = React.useContext(RootStoreContext);
+  const { historyStore } = rootStore;
   const { onPress } = props;
-  const [historyOptions, setHistoryOptions] = useState<State['historyOptions']>({});
-  useEffect(() => {
-    const historyOptions = async () => {
-      const result = await AsyncStorage.getItem('historyOptions');
-      if (result) {
-        setHistoryOptions(JSON.parse(result));
-      }
-    };
-    historyOptions();
-  }, []);
 
-  const clearHistory = async () => {
-    await AsyncStorage.setItem('historyOptions', '');
-    setHistoryOptions({});
+  const clearHistory = () => {
+    historyStore.historyOptions = {};
   };
 
-  const removeHistoryOption = async (text: string) => {
-    delete historyOptions[text];
-    await AsyncStorage.setItem('historyOptions', JSON.stringify(historyOptions));
+  const removeHistoryOption = (text: string) => {
+    historyStore.removeHistory(text);
   };
 
   return (
-    Object.keys(historyOptions).length > 0 && (
+    Object.keys(historyStore.historyOptions).length > 0 && (
       <View>
         <Button icon="shuffle" mode="contained" onPress={clearHistory}>
           Wyczyść historię
         </Button>
-        {Object.keys(historyOptions).length > 0 && (
+        {Object.keys(historyStore.historyOptions).length > 0 && (
           <PillOptionsList
             onPress={onPress}
             onClose={removeHistoryOption}
-            data={Object.keys(historyOptions)}
+            data={Object.keys(historyStore.historyOptions)}
           />
         )}
       </View>
     )
   );
-}
+});
+
+export default InputHistory;

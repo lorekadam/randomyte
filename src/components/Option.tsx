@@ -9,9 +9,8 @@ interface Props {
   remove?: (key: Props['index']) => void;
 }
 
-export default function Option(props: Props) {
+export const Option = (props: Props) => {
   const { item, index, remove } = props;
-  console.log(item);
 
   function removeItem() {
     remove(index);
@@ -27,4 +26,6 @@ export default function Option(props: Props) {
       }
     />
   );
-}
+};
+
+export default Option;

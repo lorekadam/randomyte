@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import { observer } from 'mobx-react-lite';
 import Option from './Option';
 import { IndexKeyExtractor } from '../utils';
 
@@ -8,23 +9,19 @@ interface Props {
   remove?: (key: number) => void;
 }
 
-export const OptionsList = (props: Props) => {
+export const OptionsList = observer((props: Props) => {
   const { data, remove } = props;
   return (
     <React.Fragment>
-      {data.map((item, index) => (
-        <Option item={item} index={index} remove={remove && remove} />
-      ))}
       <FlatList
         keyExtractor={IndexKeyExtractor}
-        data={data}
-        renderItem={({ item, index }) => {
-          console.log(item);
-          return <Option item={item} index={index} remove={remove && remove} />;
-        }}
+        data={data.slice()}
+        renderItem={({ item, index }) => (
+          <Option item={item} index={index} remove={remove && remove} />
+        )}
       />
     </React.Fragment>
   );
-};
+});
 
 export default OptionsList;
