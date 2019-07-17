@@ -5,7 +5,7 @@ import { IndexKeyExtractor } from '../utils';
 
 interface Props {
   data: any[];
-  remove?(key: number): void;
+  remove?: (key: number) => void;
 }
 
 export default function TournamentPair(props: Props) {

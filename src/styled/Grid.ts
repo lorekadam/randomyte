@@ -9,7 +9,7 @@ interface Props {
 export const Aligment = styled.View`
   ${(props: Props) => props.alignItems && `align-items:${props.alignItems}`};
   ${(props: Props) => props.justifyContent && `justify-content:${props.justifyContent}`};
-  flex: ${(props: Props) => (props.flex ? props.flex : 1)};
+  ${(props: Props) => props.flex && `flex:${props.flex}`};
 `;
 
 export const Row = styled(Aligment)`
@@ -22,4 +22,6 @@ export const RowColumn = styled(Aligment)`
   flex-direction: column;
 `;
 
-export const Col = styled(Aligment)``;
+export const Col = styled(Aligment)`
+  ${(props: Props) => (props.flex ? `flex:${props.flex}` : 'flex:1')};
+`;

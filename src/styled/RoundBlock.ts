@@ -11,6 +11,7 @@ export interface RoundBlockProps {
   justifyContent?: string;
   radius?: number;
   round?: boolean;
+  marginVertical?: number;
 }
 
 export const RoundBlock = styled.TouchableOpacity`
@@ -25,4 +26,6 @@ export const RoundBlock = styled.TouchableOpacity`
   background-color: ${(props: RoundBlockProps) => (props.bgc ? props.bgc : 'transparent')};
   ${(props: RoundBlockProps) => props.height && `height:${props.height}%`};
   ${(props: RoundBlockProps) => props.padding && `padding:${heightPtoDPpx(props.padding)}`};
+  ${(props: RoundBlockProps) => props.marginVertical
+    && `margin:${heightPtoDPpx(props.marginVertical)} 0 ${heightPtoDPpx(props.marginVertical)} 0`};
 `;

@@ -4,7 +4,7 @@ import { IconButton, Colors } from 'react-native-paper';
 
 interface Props {
   number: number;
-  update(number: number): void;
+  update: (number: number) => void;
   disabledAdd?: boolean;
   disabledRemove?: boolean;
 }
