@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { AsyncStorage, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import BasicView from './BasicView';
 import { SingleOption } from '../types';
-import InputHistory from '../components/InputHistory';
 import GroupsAmount from '../components/GroupsAmount';
 import RollGroups from '../components/RollGroups';
 import OptionsList from '../components/OptionsList';
@@ -37,12 +36,15 @@ export default function GroupsScreen() {
   return (
     <BasicView>
       <ScrollView>
-        <InputHistory onPress={addOption} />
         <GroupsAmount number={groupsAmount} update={updateGroupsAmount} />
-        {groups.length > 0 && <Groups groups={groups} />}
+        <RollGroups
+          options={options}
+          groupsAmount={groupsAmount}
+          setGroups={setGroups}
+        />
+        {groups.length > 0 && <Groups colors={true} groups={groups} />}
         <OptionsInput add={addOption} />
         <OptionsList data={options} remove={removeOption} />
-        <RollGroups options={options} groupsAmount={groupsAmount} setGroups={setGroups} />
       </ScrollView>
     </BasicView>
   );

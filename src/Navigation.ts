@@ -4,22 +4,16 @@ import GroupsScreen from './screens/GroupsScreen';
 import * as screens from './screens';
 import DiceScreen from './screens/DiceScreen';
 import TournamentScreen from './screens/TournamentScreen';
-import OneFromGiven from './components/OneFromGiven';
-import NewGameScreen from './screens/NewGameScreen';
-import GameTeams from './components/GameTeams';
 
 const AppNavigator = createStackNavigator(
   {
     [screens.HOME]: HomeScreen,
     [screens.GROUPS]: GroupsScreen,
     [screens.DICE]: DiceScreen,
-    [screens.TOURNAMENT]: TournamentScreen,
-    [screens.ONE_FROM_GIVEN]: OneFromGiven,
-    [screens.NEW_GAME]: NewGameScreen,
-    [screens.GAME_TEAMS]: GameTeams
+    [screens.TOURNAMENT]: TournamentScreen
   },
   {
-    initialRouteName: screens.NEW_GAME,
+    initialRouteName: screens.HOME,
     headerMode: 'none'
   }
 );

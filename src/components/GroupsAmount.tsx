@@ -13,8 +13,12 @@ export default function GroupsAmount(props: Props) {
 
   return (
     <View>
-      <Text>Ilość grup</Text>
-      <NumberInput number={number} update={update} disabledRemove={number === 2} />
+      <Text>Groups amount</Text>
+      <NumberInput
+        number={number}
+        update={update}
+        disabledRemove={number === 2}
+      />
     </View>
   );
 }

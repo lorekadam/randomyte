@@ -8,13 +8,14 @@ interface State {
 }
 
 interface Props {
+  buttonText?: string;
   options: SingleOption[];
   groupsAmount: number;
   setGroups: (groups: SingleOption[][]) => void;
 }
 
 export default function RollGroups(props: Props) {
-  const { options, groupsAmount, setGroups } = props;
+  const { buttonText, options, groupsAmount, setGroups } = props;
   const makeGroups = () => {
     const groups: State['groups'] = [];
     const source = [...options];
@@ -39,9 +40,8 @@ export default function RollGroups(props: Props) {
         icon="shuffle"
         mode="contained"
         onPress={makeGroups}
-        disabled={options.length < groupsAmount}
-      >
-        Random
+        disabled={options.length < groupsAmount}>
+        {buttonText ? buttonText : 'Roll'}
       </Button>
     </View>
   );

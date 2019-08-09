@@ -11,7 +11,9 @@ export const widthPtoDPpx = (widthPercent: number) => {
 export const heightPtoDPpx = (heightPercent: number) => {
   const screenHeight = Dimensions.get('window').height;
   const elemHeight = heightPercent;
-  return `${PixelRatio.roundToNearestPixel((screenHeight * elemHeight) / 100)}px`;
+  return `${PixelRatio.roundToNearestPixel(
+    (screenHeight * elemHeight) / 100
+  )}px`;
 };
 
 export const widthPtoDP = (widthPercent: number) => {

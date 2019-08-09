@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import {
-  View, Text, TouchableOpacity, StyleSheet, ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 import { Colors, Button } from 'react-native-paper';
 import { SingleOption } from '../types';
@@ -12,12 +16,12 @@ import BackButton from './BackButton';
 const styles = StyleSheet.create({
   row: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   column: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   option: {
     display: 'flex',
@@ -27,10 +31,10 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 5,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: 'black'
   },
   selected: {
-    borderColor: Colors.pinkA200,
+    borderColor: Colors.pinkA200
   },
   pair: {
     height: 120,
@@ -38,8 +42,8 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 5,
     borderWidth: 1,
-    borderColor: 'black',
-  },
+    borderColor: 'black'
+  }
 });
 
 interface State {
@@ -96,14 +100,16 @@ export default function Tournament() {
         inside.push(
           <View key={`inside-${j}`}>
             <View style={styles.pair} />
-            {j + 1 !== i && <View style={{ ...styles.pair, borderColor: 'transparent' }} />}
-          </View>,
+            {j + 1 !== i && (
+              <View style={{ ...styles.pair, borderColor: 'transparent' }} />
+            )}
+          </View>
         );
       }
       elements.push(
         <View style={styles.column} key={`outside-${i}`}>
           {inside}
-        </View>,
+        </View>
       );
     }
     return elements;
@@ -111,14 +117,15 @@ export default function Tournament() {
 
   return (
     <ScrollView>
-      <BackButton />
       <View style={styles.row}>
-        {participantsOptions.map(option => (
+        {participantsOptions.map((option) => (
           <TouchableOpacity
             key={option}
-            style={{ ...styles.option, ...(option === participants ? styles.selected : {}) }}
-            onPress={() => updateParticipants(option)}
-          >
+            style={{
+              ...styles.option,
+              ...(option === participants ? styles.selected : {})
+            }}
+            onPress={() => updateParticipants(option)}>
             <Text>{option}</Text>
           </TouchableOpacity>
         ))}
@@ -127,8 +134,7 @@ export default function Tournament() {
         icon="shuffle"
         mode="contained"
         onPress={makeTournament}
-        disabled={options.length !== participants}
-      >
+        disabled={options.length !== participants}>
         Tournament
       </Button>
       {pairs.length > 0 && (

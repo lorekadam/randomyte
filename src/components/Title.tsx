@@ -6,6 +6,7 @@ import { dark } from '../styled/colors';
 interface Props extends RoundBlockProps {
   fontSize?: number;
   text: string;
+  subText?: string;
   paddingSides?: number;
 }
 
@@ -19,14 +20,19 @@ export default function Title(props: Props) {
       alignItems={props.alignItems ? props.alignItems : 'flex-start'}
       justifyContent={props.justifyContent ? props.justifyContent : 'center'}
       padding={props.padding ? props.padding : 1.2}
-      marginVertical={1.5}
-    >
+      marginVertical={1.5}>
       <Text
         paddingSides={props.paddingSides ? props.paddingSides : 1.2}
-        fontSize={props.fontSize ? props.fontSize : 3}
-      >
+        fontSize={props.fontSize ? props.fontSize : 3}>
         {props.text}
       </Text>
+      {props.subText && (
+        <Text
+          paddingSides={props.paddingSides ? props.paddingSides : 1.2}
+          fontSize={props.fontSize ? props.fontSize / 2 : 1.5}>
+          {props.subText}
+        </Text>
+      )}
     </RoundBlock>
   );
 }

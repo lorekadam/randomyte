@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import { observer } from 'mobx-react-lite';
 
 interface State {
   value: string;
@@ -11,7 +10,7 @@ interface Props {
   add: (value: State['value']) => void;
 }
 
-export const OptionsInput = observer((props: Props) => {
+export const OptionsInput = (props: Props) => {
   const [value, setValue] = useState<State['value']>('');
 
   const updateValue = (value: State['value']) => {
@@ -40,6 +39,6 @@ export const OptionsInput = observer((props: Props) => {
       </Button>
     </View>
   );
-});
+};
 
 export default OptionsInput;

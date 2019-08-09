@@ -15,12 +15,22 @@ export interface SingleCategorySelect {
 
 export interface SingleCategory {
   name: string;
-  active: boolean;
-  used: Item[];
-  list: Item[];
+  active?: boolean;
+  used?: Item[];
+  list?: Item[];
 }
 
 export interface Item {
   PL: string;
   ORIGINAL: string;
+}
+
+export interface UserTurn {
+  team: number;
+  user: number;
+}
+
+export interface RandomResult {
+  name: string;
+  category: string;
 }
